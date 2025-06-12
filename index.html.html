@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Reaction Master - Win $500 CAD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Orbitron', monospace;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
+            color: white;
+            overflow: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 30%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 30%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 30%);
+            pointer-events: none;
+            animation: backgroundFloat 20s ease-in-out infinite;
+        }
+        
+        @keyframes backgroundFloat {
+            0%, 100% { opacity: 0.4; transform: scale(1) rotate(0deg); }
+            50% { opacity: 0.6; transform: scale(1.1) rotate(5deg); }
+        }
+        
+        .screen {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hidden { display: none !important; }
+        
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff, #06ffa5, #ffbe0b);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientFlow 4s ease-in-out infinite;
+            text-align: center;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 40px rgba(255, 0, 110, 0.5);
+            letter-spacing: 2px;
+            position: relative;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+            animation: shimmer 3s linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes gradientFlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .prize-banner {
+            background: linear-gradient(135deg, #ffd700, #ffed4e, #ffd700);
+            color: #1a1a1a;
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            font-weight: 700;
+            margin: 20px 0;
+            box-shadow: 
+                0 0 30px rgba(255, 215, 0, 0.6),
+                0 0 60px rgba(255, 215, 0, 0.4),
+                inset 0 2px 0 rgba(255, 255, 255, 0.3);
+            animation: prizeGlow 2s ease-in-out infinite;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .prize-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: prizeShine 3s linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes prizeGlow {
+            0%, 100% { 
+                box-shadow: 0 0 30px rgba(255, 215, 0, 0.6), 0 0 60px rgba(255, 215, 0, 0.4);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 0 40px rgba(255, 215, 0, 0.8), 0 0 80px rgba(255, 215, 0, 0.6);
+                transform: scale(1.02);
+            }
+        }
+        
+        @keyframes prizeShine {
+            0% { transform: rotate(45deg) translateX(-200%); }
+            100% { transform: rotate(45deg) translateX(200%); }
+        }
+        
+        button {
+            background: linear-gradient(135deg, #8338ec, #3a86ff, #06ffa5);
+            background-size: 200% 200%;
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            font-weight: 700;
+            border-radius: 50px;
+            margin: 15px;
+            cursor: pointer;
+            min-width: 200px;
+            min-height: 60px;
+            font-family: 'Orbitron', monospace;
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 8px 25px rgba(131, 56, 236, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            touch-action: manipulation;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: buttonFlow 3s ease-in-out infinite;
+        }
+        
+        @keyframes buttonFlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        button:hover::before, button:active::before {
+            left: 100%;
+        }
+        
+        button:hover, button:active {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 
+                0 12px 35px rgba(131, 56, 236, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+        
+        .red-btn {
+            background: linear-gradient(135deg, #ff006e, #ff4081, #ff006e);
+            background-size: 200% 200%;
+            box-shadow: 0 8px 25px rgba(255, 0, 110, 0.4);
+            animation: redButtonFlow 3s ease-in-out infinite;
+        }
+        
+        @keyframes redButtonFlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .red-btn:hover, .red-btn:active {
+            box-shadow: 0 12px 35px rgba(255, 0, 110, 0.6);
+        }
+        
+        .secondary-btn {
+            background: linear-gradient(135deg, #5f27cd, #341f97, #5f27cd);
+            background-size: 200% 200%;
+            box-shadow: 0 8px 25px rgba(95, 39, 205, 0.4);
+            animation: secondaryButtonFlow 3s ease-in-out infinite;
+        }
+        
+        @keyframes secondaryButtonFlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .secondary-btn:hover, .secondary-btn:active {
+            box-shadow: 0 12px 35px rgba(95, 39, 205, 0.6);
+        }
+        
+        .dot {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, #06ffa5, #3a86ff, #8338ec);
+            background-size: 200% 200%;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 
+                0 0 40px rgba(6, 255, 165, 0.8),
+                0 0 80px rgba(6, 255, 165, 0.6),
+                0 0 120px rgba(6, 255, 165, 0.4),
+                inset 0 0 20px rgba(255, 255, 255, 0.2);
+            animation: dotPulse 1.2s ease-in-out infinite, dotGradient 2s ease-in-out infinite;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            touch-action: manipulation;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+        
+        @keyframes dotPulse {
+            0%, 100% { 
+                transform: translate(-50%, -50%) scale(1);
+                box-shadow: 0 0 40px rgba(6, 255, 165, 0.8), 0 0 80px rgba(6, 255, 165, 0.6);
+            }
+            50% { 
+                transform: translate(-50%, -50%) scale(1.15);
+                box-shadow: 0 0 60px rgba(6, 255, 165, 1), 0 0 120px rgba(6, 255, 165, 0.8);
+            }
+        }
+        
+        @keyframes dotGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .game-area {
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stats {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            padding: 20px 25px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            font-family: 'Orbitron', monospace;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 35px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 450px;
+            margin: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            animation: cardShine 4s linear infinite;
+        }
+        
+        @keyframes cardShine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .best-score {
+            font-size: clamp(1.8rem, 5vw, 2.2rem);
+            color: #06ffa5;
+            font-weight: 900;
+            text-shadow: 0 0 20px rgba(6, 255, 165, 0.6);
+            margin: 15px 0;
+        }
+        
+        .winner-card {
+            background: linear-gradient(135deg, #ffd700, #ffed4e, #ffd700);
+            background-size: 200% 200%;
+            color: #1a1a1a;
+            padding: 50px;
+            border-radius: 30px;
+            text-align: center;
+            max-width: 500px;
+            box-shadow: 
+                0 25px 60px rgba(255, 215, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            animation: winnerGlow 2s ease-in-out infinite, winnerGradient 3s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        @keyframes winnerGlow {
+            0%, 100% { 
+                box-shadow: 0 25px 60px rgba(255, 215, 0, 0.4);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 30px 80px rgba(255, 215, 0, 0.6);
+                transform: scale(1.02);
+            }
+        }
+        
+        @keyframes winnerGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .message-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            font-weight: 700;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+            animation: breathe 2.5s ease-in-out infinite;
+            font-family: 'Orbitron', monospace;
+            letter-spacing: 2px;
+        }
+        
+        @keyframes breathe {
+            0%, 100% { 
+                opacity: 0.8; 
+                transform: translate(-50%, -50%) scale(1);
+                text-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+            }
+            50% { 
+                opacity: 1; 
+                transform: translate(-50%, -50%) scale(1.05);
+                text-shadow: 0 0 50px rgba(255, 255, 255, 0.6);
+            }
+        }
+        
+        input[type="email"] {
+            padding: 18px 25px;
+            margin: 20px;
+            font-size: 18px;
+            width: 320px;
+            max-width: 90%;
+            border: none;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #1a1a1a;
+            text-align: center;
+            box-shadow: 
+                inset 0 2px 5px rgba(0, 0, 0, 0.1),
+                0 0 20px rgba(255, 255, 255, 0.2);
+            font-family: 'Orbitron', monospace;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        input[type="email"]:focus {
+            outline: none;
+            box-shadow: 
+                inset 0 2px 5px rgba(0, 0, 0, 0.1),
+                0 0 30px rgba(255, 215, 0, 0.5);
+        }
+        
+        .game-over-title {
+            font-size: clamp(2rem, 6vw, 3rem);
+            color: #ff006e;
+            font-weight: 900;
+            text-shadow: 0 0 30px rgba(255, 0, 110, 0.6);
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .level-reached {
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+            margin: 25px 0;
+            font-weight: 600;
+        }
+        
+        .level-number {
+            color: #06ffa5;
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            font-weight: 900;
+            text-shadow: 0 0 20px rgba(6, 255, 165, 0.6);
+        }
+        
+        .instructions {
+            margin-top: 30px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            font-size: clamp(0.9rem, 3vw, 1rem);
+            font-weight: 500;
+        }
+        
+        .global-record {
+            color: rgba(255, 255, 255, 0.6);
+            margin: 15px 0;
+            font-size: clamp(0.9rem, 3vw, 1rem);
+            font-weight: 600;
+        }
+        
+        @media (max-width: 480px) {
+            .card {
+                padding: 25px;
+                margin: 15px;
+            }
+            
+            .winner-card {
+                padding: 35px;
+            }
+            
+            .stats {
+                padding: 15px 20px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="menu" class="screen">
+    <h1>REACTION MASTER</h1>
+    <div class="prize-banner">
+        🏆 Beat Level 20 = Win $500 CAD! 🏆
+    </div>
+    <div class="card">
+        <p style="font-size: clamp(1rem, 3vw, 1.2rem); margin-bottom: 15px; color: rgba(255,255,255,0.8); font-weight: 600;">PERSONAL BEST</p>
+        <p class="best-score">LEVEL <span id="best">0</span></p>
+        <p class="global-record">Global Record: Level 17</p>
+    </div>
+    <button id="startBtn" ontouchstart="startGame()" onclick="startGame()">🚀 START GAME</button>
+    <div class="instructions">
+        <p> Tap the glowing orb when it appears</p>
+        <p> Each level gets faster</p>
+        <p> Miss once = game over</p>
+    </div>
+</div>
+
+<div id="game" class="game-area hidden">
+    <div class="stats">
+        LEVEL <span id="level">1</span><br>
+        <span style="color: rgba(255,255,255,0.7); font-size: 14px; font-weight: 500;">TIME LIMIT: <span id="time">2000</span>MS</span>
+    </div>
+    <div id="message" class="message-text">GET READY...</div>
+    <div id="dot" class="dot hidden" ontouchstart="hitDot()" onclick="hitDot()"></div>
+    <button onclick="goHome()" class="red-btn" style="position: absolute; bottom: 25px; left: 25px; min-width: 120px; padding: 15px 25px; font-size: 16px;">🚪 QUIT</button>
+</div>
+
+<div id="over" class="screen hidden">
+    <div class="card">
+        <h2 class="game-over-title">GAME OVER</h2>
+        <p class="level-reached">LEVEL REACHED: <span id="final" class="level-number">1</span></p>
+        <p id="reaction-text" style="color: rgba(255,255,255,0.8); margin: 25px 0; font-size: clamp(0.9rem, 3vw, 1.1rem); font-weight: 500;">Try again to beat your record!</p>
+        <div style="margin-top: 35px;">
+            <button onclick="startGame()">🔄 TRY AGAIN</button>
+            <button onclick="goHome()" class="secondary-btn">🏠 MENU</button>
+        </div>
+    </div>
+</div>
+
+<div id="win" class="screen hidden">
+    <div class="winner-card">
+        <h2 style="font-size: clamp(2.5rem, 8vw, 4rem); margin-bottom: 25px; font-weight: 900;">🏆 CHAMPION! 🏆</h2>
+        <p style="font-size: clamp(1.8rem, 6vw, 2.5rem); font-weight: 900; margin-bottom: 25px;">YOU WON $500 CAD!</p>
+        <p style="margin-bottom: 30px; font-size: clamp(1rem, 4vw, 1.3rem); font-weight: 600;">Enter your email to claim your prize:</p>
+        <input type="email" id="email" placeholder="your@email.com">
+        <br>
+        <button onclick="claim()" style="background: linear-gradient(135deg, #1a1a1a, #2d2d2d); color: #ffd700; margin-top: 15px; font-size: clamp(1rem, 4vw, 1.2rem); font-weight: 900; text-shadow: 0 0 10px #ffd700;"> CLAIM MY $500 PRIZE!</button>
+        <p style="font-size: clamp(0.8rem, 3vw, 0.9rem); color: #666; margin-top: 20px; font-weight: 500;">* Must be 18+ to claim prize</p>
+    </div>
+</div>
+
+<script>
+var level = 1;
+var best = 0;
+var gameOn = false;
+var dotOn = false;
+var startTime = 0;
+var timeLimit = 2000;
+var timer;
+
+function startGame() {
+    level = 1;
+    gameOn = true;
+    document.getElementById('menu').className = 'screen hidden';
+    document.getElementById('game').className = 'game-area';
+    nextLevel();
+}
+
+function nextLevel() {
+    if (!gameOn) return;
+    
+    clearTimeout(timer);
+    var dotElement = document.getElementById('dot');
+    dotElement.style.display = 'none';
+    dotElement.className = 'dot hidden'; // Add hidden class
+    document.getElementById('message').style.display = 'block';
+    document.getElementById('message').innerHTML = 'GET READY...';
+    dotOn = false;
+    
+    if (level <= 10) {
+        timeLimit = 2000 - (level - 1) * 80;
+    } else if (level <= 17) {
+        timeLimit = 1200 - (level - 10) * 70;
+    } else {
+        timeLimit = Math.max(400, 700 - (level - 17) * 100);
+    }
+    
+    document.getElementById('level').innerHTML = level;
+    document.getElementById('time').innerHTML = timeLimit;
+    
+    var dot = document.getElementById('dot');
+    dot.style.left = (Math.random() * 70 + 15) + '%';
+    dot.style.top = (Math.random() * 70 + 15) + '%';
+    
+    var delay = Math.random() * 1500 + 500;
+    timer = setTimeout(function() {
+        if (!gameOn) return;
+        document.getElementById('message').style.display = 'none';
+        var dotElement = document.getElementById('dot');
+        dotElement.style.display = 'block';
+        dotElement.className = 'dot'; // Remove hidden class
+        dotOn = true;
+        startTime = Date.now();
+        
+        timer = setTimeout(function() {
+            if (gameOn && dotOn) {
+                gameOver(' TIME\'S UP! TOO SLOW!');
+            }
+        }, timeLimit);
+    }, delay);
+}
+
+function hitDot() {
+    if (!dotOn || !gameOn) return;
+    
+    var reaction = Date.now() - startTime;
+    clearTimeout(timer);
+    document.getElementById('dot').style.display = 'none';
+    dotOn = false;
+    
+    if (reaction <= timeLimit) {
+        level++;
+        if (level > best) {
+            best = level;
+            document.getElementById('best').innerHTML = best;
+        }
+        
+        if (level > 20) {
+            gameOn = false;
+            document.getElementById('game').className = 'game-area hidden';
+            document.getElementById('win').className = 'screen';
+            return;
+        }
+        
+        setTimeout(function() {
+            if (gameOn) nextLevel();
+        }, 1000);
+    } else {
+        gameOver(' REACTION: ' + reaction + 'MS (NEEDED ≤' + timeLimit + 'MS)');
+    }
+}
+
+function gameOver(msg) {
+    gameOn = false;
+    clearTimeout(timer);
+    dotOn = false;
+    document.getElementById('final').innerHTML = level;
+    document.getElementById('reaction-text').innerHTML = msg;
+    document.getElementById('game').className = 'game-area hidden';
+    document.getElementById('over').className = 'screen';
+}
+
+function goHome() {
+    gameOn = false;
+    clearTimeout(timer);
+    dotOn = false;
+    document.getElementById('game').className = 'game-area hidden';
+    document.getElementById('over').className = 'screen hidden';
+    document.getElementById('win').className = 'screen hidden';
+    document.getElementById('menu').className = 'screen';
+}
+
+function claim() {
+    var email = document.getElementById('email').value;
+    if (email && email.indexOf('@') > 0) {
+        alert(' EMAIL SUBMITTED: ' + email + '\n\n We will contact you within 48 hours to verify and arrange your $500 CAD payment!\n\n🏆 Congratulations, Champion!');
+        goHome();
+    } else {
+        alert('⚠️ Please enter a valid email address to claim your prize!');
+    }
+}
+</script>
+
+</body>
+</html>
